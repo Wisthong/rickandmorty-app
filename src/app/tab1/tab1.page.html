@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> RickyMorty </ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- <ion-header collapse="condense">
+  <ion-toolbar>
+    <ion-title size="large">RickyMorty</ion-title>
+  </ion-toolbar>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+  @for (item of listRickyMorty; track $index) {
+  <ion-list lines="full">
+    <ion-item (click)="onClick(item)">
+      <ion-avatar>
+        <ion-img [src]="item.image" [alt]="item.name"> </ion-img>
+      </ion-avatar>
+      <ion-label class="text-yellow-400 text-4xl"> {{item.name}} </ion-label>
+    </ion-item>
+  </ion-list>
+}
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+<ion-infinite-scroll (ionInfinite)="loadMore($event)" threshold="100px">
+  <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más personajes...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
 </ion-content>
